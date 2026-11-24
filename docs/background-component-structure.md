@@ -7,7 +7,8 @@
 | 路径 | 职责 | 何时创建 |
 | --- | --- | --- |
 | `index.vue` | 定义 Props、画布模板和组件生命周期，装配渲染器。 | 每个背景组件都有。 |
-| `webgl/renderer.ts` | 封装 WebGL 初始化、绘制、动画时序和资源释放。 | 背景有独立渲染流程时。 |
+| `webgl/renderer.ts` | 封装 WebGL 初始化、绘制、动画时序和资源释放。 | 背景使用 WebGL 独立渲染流程时。 |
+| `canvas/renderer.ts` | 封装 Canvas 2D 初始化、绘制、动画时序和资源释放。 | 背景使用 Canvas 2D 独立渲染流程时。 |
 | `glsl/` | 存放组件使用的顶点和片元着色器，分别使用 `.vert.glsl` 和 `.frag.glsl`。 | 组件使用 GLSL 时。 |
 | `assets/` | 存放组件私有的贴图、图片等静态资源。多个组件共用的资源放在 `src/assets/`。 | 组件有私有资源时。 |
 | `composables/` | 存放组件私有的 Vue 组合式逻辑，文件采用 `use-<职责>.ts` 命名。 | 响应式配置、监听或生命周期逻辑复杂到值得单独维护时。 |
@@ -29,3 +30,4 @@ import vertexSource from '../glsl/fullscreen.vert.glsl' with { type: 'text' };
 
 - [Mastra Grain Gradient](../src/components/background/mastra-grain-gradient/) 的着色器位于 `glsl/`，噪声贴图位于 `assets/noise.png`。
 - [极光背景](../src/components/background/aurora/) 的顶点、光晕和点阵着色器均位于 `glsl/`。使用 `loop` 开启循环，使用 `color` 设置光晕颜色，支持 `#RGB` 和 `#RRGGBB`，默认 `#25f39b`。
+- [字符球体](../src/components/background/ascii-sphere/) 使用 Canvas 2D 渲染器 `canvas/renderer.ts` 绘制三维旋转字符球体。支持 `color`（默认 `#000000`）、`chars` 和 `speed`（默认 `1`）配置。

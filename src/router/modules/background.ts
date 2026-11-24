@@ -16,4 +16,10 @@ export const backgroundRoutes: RouteRecordRaw[] = [
     component: () => import('@/views/aurora/index.vue'),
     meta: { title: '极光背景' },
   },
+  {
+    path: 'ascii-sphere',
+    name: 'AsciiSphere',
+    component: () => import('@/views/ascii-sphere/index.vue'),
+    meta: { title: '字符球体' },
+  },
 ];

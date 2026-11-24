@@ -4,6 +4,7 @@ import CollectionHeader from '@/components/collection/collection-header.vue';
 import { getAppEnv, isOfflineCacheEnabled } from '@/env';
 import mastraPreview from './assets/mastra-grain-gradient.webp';
 import auroraPreview from './assets/aurora.webp';
+import asciiSpherePreview from './assets/ascii-sphere.webp';
 
 const backgrounds = [
   {
@@ -17,6 +18,12 @@ const backgrounds = [
     title: '极光背景',
     description: '浅绿光晕与淡入淡出的点阵',
     preview: auroraPreview,
+  },
+  {
+    route: 'AsciiSphere',
+    title: '字符球体',
+    description: '方块与制表符构成的三维旋转球体',
+    preview: asciiSpherePreview,
   },
 ];
 </script>
