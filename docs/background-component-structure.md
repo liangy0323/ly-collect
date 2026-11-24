@@ -28,4 +28,4 @@ import vertexSource from '../glsl/fullscreen.vert.glsl' with { type: 'text' };
 ## 仓库中的示例
 
 - [Mastra Grain Gradient](../src/components/background/mastra-grain-gradient/) 的着色器位于 `glsl/`，噪声贴图位于 `assets/noise.png`。
-- [元宝极光](../src/components/background/yuanbao-aurora/) 的顶点、光晕和点阵着色器均位于 `glsl/`。循环播放的 Props 由 `index.vue` 定义，每轮播放的处理由渲染器负责。
+- [极光背景](../src/components/background/aurora/) 的顶点、光晕和点阵着色器均位于 `glsl/`。使用 `loop` 开启循环，使用 `color` 设置光晕颜色，支持 `#RGB` 和 `#RRGGBB`，默认 `#25f39b`。

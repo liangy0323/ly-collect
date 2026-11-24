@@ -1,26 +1,38 @@
 <script setup lang="ts">
-import { onMounted, onUnmounted, useTemplateRef } from 'vue';
-import { mountYuanbaoAurora } from './webgl/renderer';
+import { onMounted, onUnmounted, useTemplateRef, watch } from 'vue';
+import { DEFAULT_AURORA_COLOR, mountAurora } from './webgl/renderer';
 
 interface Props {
   /**
    * 当前轮播放结束后是否从头播放。
    */
   loop?: boolean;
+
+  /**
+   * 极光光晕颜色，支持 #RGB 和 #RRGGBB。
+   */
+  color?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   loop: false,
+  color: DEFAULT_AURORA_COLOR,
 });
 
 const canvas = useTemplateRef<HTMLCanvasElement>('canvas');
-let dispose: (() => void) | undefined;
+let aurora: ReturnType<typeof mountAurora>;
 
 onMounted(() => {
-  if (canvas.value) dispose = mountYuanbaoAurora(canvas.value, () => props.loop);
+  if (!canvas.value) return;
+
+  aurora = mountAurora(canvas.value, {
+    color: props.color,
+    shouldLoop: () => props.loop,
+  });
 });
 
-onUnmounted(() => dispose?.());
+watch(() => props.color, (color) => aurora?.setColor(color));
+onUnmounted(() => aurora?.dispose());
 </script>
 
 <template>

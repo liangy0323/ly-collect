@@ -11,9 +11,9 @@ export const backgroundRoutes: RouteRecordRaw[] = [
     meta: { title: 'Mastra Grain Gradient' },
   },
   {
-    path: 'yuanbao-aurora',
-    name: 'YuanbaoAurora',
-    component: () => import('@/views/yuanbao-aurora/index.vue'),
-    meta: { title: '元宝极光' },
+    path: 'aurora',
+    name: 'Aurora',
+    component: () => import('@/views/aurora/index.vue'),
+    meta: { title: '极光背景' },
   },
 ];

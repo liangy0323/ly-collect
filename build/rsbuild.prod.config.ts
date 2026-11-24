@@ -61,6 +61,8 @@ export default defineConfig(({ envMode }) => {
      */
     output: {
       polyfill: 'off',
+      // 将第三方许可随生产产物一起交付。
+      copy: [{ from: 'docs/third-party-notices.txt', to: 'third-party-notices.txt' }],
     },
   };
 

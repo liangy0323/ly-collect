@@ -3,7 +3,7 @@ import { ArrowRight } from '@lucide/vue';
 import CollectionHeader from '@/components/collection/collection-header.vue';
 import { getAppEnv, isOfflineCacheEnabled } from '@/env';
 import mastraPreview from './assets/mastra-grain-gradient.webp';
-import yuanbaoPreview from './assets/yuanbao-aurora.webp';
+import auroraPreview from './assets/aurora.webp';
 
 const backgrounds = [
   {
@@ -13,10 +13,10 @@ const backgrounds = [
     preview: mastraPreview,
   },
   {
-    route: 'YuanbaoAurora',
-    title: '元宝极光',
+    route: 'Aurora',
+    title: '极光背景',
     description: '浅绿光晕与淡入淡出的点阵',
-    preview: yuanbaoPreview,
+    preview: auroraPreview,
   },
 ];
 </script>

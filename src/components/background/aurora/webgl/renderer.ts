@@ -2,6 +2,11 @@ import auroraSource from '../glsl/aurora.frag.glsl' with { type: 'text' };
 import dotsSource from '../glsl/dots.frag.glsl' with { type: 'text' };
 import vertexSource from '../glsl/fullscreen.vert.glsl' with { type: 'text' };
 
+/**
+ * 组件默认光晕颜色，也是无效颜色的回退值。
+ */
+export const DEFAULT_AURORA_COLOR = '#25f39b';
+
 const frameInterval = 1000 / 30;
 const visibleDuration = 10_000;
 const fadeDuration = 1_000;
@@ -51,7 +56,7 @@ const createRenderer = (canvas: HTMLCanvasElement, gl: WebGLRenderingContext) =>
   const auroraResolution = lightUniform('uRes');
   const auroraTime = lightUniform('uTime');
   gl.uniform3f(lightUniform('uBase'), 1, 1, 1);
-  gl.uniform3f(lightUniform('uTint'), 37 / 255, 243 / 255, 155 / 255);
+  const auroraTint = lightUniform('uTint');
   gl.uniform1f(lightUniform('uPeak'), 0.38);
   gl.uniform2f(lightUniform('uShape'), 0.34, 1);
   gl.uniform1f(lightUniform('uCore'), 0.25);
@@ -108,6 +113,16 @@ const createRenderer = (canvas: HTMLCanvasElement, gl: WebGLRenderingContext) =>
   };
 
   return {
+    setColor(color: string) {
+      const hex = /^#([0-9a-f]{3}|[0-9a-f]{6})$/i.exec(color.trim())?.[1] ?? DEFAULT_AURORA_COLOR.slice(1);
+      const rgb = hex.length === 3 ? hex.replace(/./g, '$&$&') : hex;
+      const red = Number.parseInt(rgb.slice(0, 2), 16) / 255;
+      const green = Number.parseInt(rgb.slice(2, 4), 16) / 255;
+      const blue = Number.parseInt(rgb.slice(4, 6), 16) / 255;
+      gl.useProgram(aurora);
+      gl.uniform3f(auroraTint, red, green, blue);
+    },
+
     render(milliseconds: number) {
       resize();
       const seconds = milliseconds * 0.001;
@@ -138,12 +153,12 @@ const createRenderer = (canvas: HTMLCanvasElement, gl: WebGLRenderingContext) =>
 
 /**
  * 在同一画布中绘制光晕和点阵，按原效果淡入淡出。
- * 每轮结束时读取循环设置。调用返回的清理函数可停止播放并释放 WebGL 资源。
+ * 每轮结束时读取循环设置。颜色更新沿用当前播放进度，卸载时释放 WebGL 资源。
  */
-export const mountYuanbaoAurora = (
+export const mountAurora = (
   canvas: HTMLCanvasElement,
-  shouldLoop: () => boolean = () => false,
-): (() => void) | undefined => {
+  { color: initialColor, shouldLoop }: { color: string; shouldLoop: () => boolean },
+): { setColor: (color: string) => void; dispose: () => void } | undefined => {
   const gl = canvas.getContext('webgl', { antialias: false, alpha: false, depth: false, stencil: false });
   if (!gl) return;
 
@@ -162,6 +177,7 @@ export const mountYuanbaoAurora = (
   };
 
   try {
+    renderer.setColor(initialColor);
     draw();
   } catch (error) {
     renderer.dispose();
@@ -244,5 +260,12 @@ export const mountYuanbaoAurora = (
   canvas.addEventListener('webglcontextlost', dispose);
   fade.onfinish = handleFinish;
   sync();
-  return dispose;
+  return {
+    setColor: (color) => {
+      if (disposed) return;
+      renderer.setColor(color);
+      draw();
+    },
+    dispose,
+  };
 };

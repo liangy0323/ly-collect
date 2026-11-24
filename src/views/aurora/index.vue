@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import YuanbaoAuroraBackground from '@/components/background/yuanbao-aurora/index.vue';
+import AuroraBackground from '@/components/background/aurora/index.vue';
 </script>
 
 <template>
-  <main class="preview" aria-label="元宝极光">
-    <yuanbao-aurora-background loop/>
+  <main class="preview" aria-label="极光背景">
+    <aurora-background loop />
   </main>
 </template>
 
