@@ -16,7 +16,10 @@ const createProgram = (gl: WebGLRenderingContext, fragmentSource: string) => {
   if (!program) throw new Error('无法创建 WebGL 程序');
 
   try {
-    for (const [type, source] of [[gl.VERTEX_SHADER, vertexSource], [gl.FRAGMENT_SHADER, fragmentSource]] as const) {
+    for (const [type, source] of [
+      [gl.VERTEX_SHADER, vertexSource],
+      [gl.FRAGMENT_SHADER, fragmentSource],
+    ] as const) {
       const shader = gl.createShader(type);
       if (!shader) throw new Error('无法创建 WebGL 着色器');
       gl.shaderSource(shader, source);
@@ -184,12 +187,15 @@ export const mountAurora = (
     throw error;
   }
 
-  const fade = canvas.animate([
-    { opacity: 0, offset: 0, easing: 'ease' },
-    { opacity: 1, offset: fadeDuration / duration },
-    { opacity: 1, offset: visibleDuration / duration, easing: 'ease' },
-    { opacity: 0, offset: 1 },
-  ], { duration });
+  const fade = canvas.animate(
+    [
+      { opacity: 0, offset: 0, easing: 'ease' },
+      { opacity: 1, offset: fadeDuration / duration },
+      { opacity: 1, offset: visibleDuration / duration, easing: 'ease' },
+      { opacity: 0, offset: 1 },
+    ],
+    { duration },
+  );
 
   const tick = (now: number) => {
     elapsed += now - lastTime;
@@ -219,8 +225,8 @@ export const mountAurora = (
   const resizeObserver = new ResizeObserver(() => {
     if (!frameId) draw();
   });
-  const screenObserver = new IntersectionObserver(entries => {
-    onScreen = entries.some(entry => entry.isIntersecting);
+  const screenObserver = new IntersectionObserver((entries) => {
+    onScreen = entries.some((entry) => entry.isIntersecting);
     sync();
   });
 

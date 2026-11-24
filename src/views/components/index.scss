@@ -25,7 +25,9 @@
 
 .specimen__heading h2 {
   margin: 0;
-  font: 600 clamp(1.5rem, 2.6vw, 2rem)/1.12 Georgia, serif;
+  font:
+    600 clamp(1.5rem, 2.6vw, 2rem)/1.12 Georgia,
+    serif;
   letter-spacing: -0.025em;
 }
 

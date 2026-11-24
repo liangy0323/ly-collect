@@ -63,7 +63,9 @@
   border: 1px solid var(--collection-line);
   border-radius: 50%;
   color: var(--collection-accent);
-  transition: background-color 180ms ease-out, color 180ms ease-out;
+  transition:
+    background-color 180ms ease-out,
+    color 180ms ease-out;
 }
 
 .gallery-entry:hover .gallery-entry__image img {

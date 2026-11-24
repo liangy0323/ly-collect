@@ -31,7 +31,10 @@ onMounted(() => {
   });
 });
 
-watch(() => props.color, (color) => aurora?.setColor(color));
+watch(
+  () => props.color,
+  (color) => aurora?.setColor(color),
+);
 onUnmounted(() => aurora?.dispose());
 </script>
 

@@ -61,7 +61,9 @@ const backgrounds = [
       </main>
 
       <footer class="collection-footer">
-        <span>环境 <code>{{ getAppEnv() }}</code></span>
+        <span
+          >环境 <code>{{ getAppEnv() }}</code></span
+        >
         <span>离线缓存 {{ isOfflineCacheEnabled() ? '已开启' : '已关闭' }}</span>
       </footer>
     </div>

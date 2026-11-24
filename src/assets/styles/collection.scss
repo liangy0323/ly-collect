@@ -9,7 +9,11 @@
   min-block-size: 100%;
   background: var(--collection-paper);
   color: var(--collection-ink);
-  font: 400 1rem/1.55 'PingFang SC', 'Microsoft YaHei UI', system-ui, sans-serif;
+  font:
+    400 1rem/1.55 'PingFang SC',
+    'Microsoft YaHei UI',
+    system-ui,
+    sans-serif;
 }
 
 .collection-page ::selection {
@@ -70,7 +74,9 @@
 .collection-header__brand {
   gap: 0.65rem;
   white-space: nowrap;
-  font: 600 clamp(1.15rem, 2.1vw, 1.4rem)/1.1 Georgia, serif;
+  font:
+    600 clamp(1.15rem, 2.1vw, 1.4rem)/1.1 Georgia,
+    serif;
 }
 
 .collection-header__brand svg {

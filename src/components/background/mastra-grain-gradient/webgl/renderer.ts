@@ -15,7 +15,7 @@ const settings = {
 
 const rgba = (hex: string) => {
   const value = hex.slice(1).padEnd(8, 'f');
-  return [0, 2, 4, 6].map(offset => parseInt(value.slice(offset, offset + 2), 16) / 255);
+  return [0, 2, 4, 6].map((offset) => parseInt(value.slice(offset, offset + 2), 16) / 255);
 };
 
 const compileShader = (gl: WebGL2RenderingContext, type: number, source: string) => {
@@ -39,7 +39,10 @@ const createProgram = (gl: WebGL2RenderingContext) => {
   if (!program) throw new Error('无法创建 WebGL 程序');
 
   try {
-    for (const [type, source] of [[gl.VERTEX_SHADER, vertexSource], [gl.FRAGMENT_SHADER, fragmentSource]] as const) {
+    for (const [type, source] of [
+      [gl.VERTEX_SHADER, vertexSource],
+      [gl.FRAGMENT_SHADER, fragmentSource],
+    ] as const) {
       const shader = compileShader(gl, type, source);
       gl.attachShader(program, shader);
       gl.deleteShader(shader);
@@ -59,7 +62,10 @@ const createProgram = (gl: WebGL2RenderingContext) => {
  * 使用已解码的噪声贴图启动颗粒渐变。
  * 卸载时调用返回的清理函数，停止动画并释放 WebGL 资源。
  */
-export const mountGrainGradient = (canvas: HTMLCanvasElement, noiseImage: HTMLImageElement): (() => void) | undefined => {
+export const mountGrainGradient = (
+  canvas: HTMLCanvasElement,
+  noiseImage: HTMLImageElement,
+): (() => void) | undefined => {
   const context = canvas.getContext('webgl2', {
     alpha: true,
     antialias: false,
