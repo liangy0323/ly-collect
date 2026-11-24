@@ -1,0 +1,112 @@
+.gallery {
+  display: grid;
+  grid-template-columns: minmax(0, 1.13fr) minmax(0, 1fr);
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.gallery-entry {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+
+.gallery-entry__image {
+  overflow: hidden;
+  block-size: clamp(12rem, 29vw, 24rem);
+  border: 1px solid var(--collection-line);
+  border-radius: 0.875rem;
+  background: #eaf0e7;
+}
+
+.gallery-entry__image img {
+  display: block;
+  inline-size: 100%;
+  block-size: 100%;
+  object-fit: cover;
+  transition: transform 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.gallery-entry__caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  padding-block: 1.25rem 1.4rem;
+  border-block-end: 1px solid var(--collection-line);
+}
+
+.gallery-entry__caption h2 {
+  margin: 0;
+  font-family: Georgia, 'Noto Serif CJK SC', 'Songti SC', SimSun, serif;
+  font-size: clamp(1.3rem, 2.7vw, 2rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+.gallery-entry__caption p {
+  margin-block: 0.4rem 0;
+  color: var(--collection-muted);
+  font-size: 0.875rem;
+}
+
+.gallery-entry__arrow {
+  display: grid;
+  flex: none;
+  box-sizing: border-box;
+  inline-size: 2.75rem;
+  block-size: 2.75rem;
+  place-items: center;
+  border: 1px solid var(--collection-line);
+  border-radius: 50%;
+  color: var(--collection-accent);
+  transition: background-color 180ms ease-out, color 180ms ease-out;
+}
+
+.gallery-entry:hover .gallery-entry__image img {
+  transform: scale(1.035);
+}
+
+.gallery-entry:is(:hover, :focus-visible) .gallery-entry__arrow {
+  background: var(--collection-accent);
+  color: #fff;
+}
+
+.collection-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  padding-block: clamp(2.3rem, 5vw, 3.5rem) 1.5rem;
+  color: var(--collection-muted);
+  font-size: 0.75rem;
+}
+
+@media (max-width: 42rem) {
+  .gallery {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 1.75rem;
+  }
+
+  .gallery-entry__image {
+    block-size: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .gallery-entry__caption {
+    padding-block: 0.95rem 1.1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gallery-entry__image img,
+  .gallery-entry__arrow {
+    transition: none;
+  }
+
+  .gallery-entry:hover .gallery-entry__image img {
+    transform: none;
+  }
+}

@@ -1,0 +1,135 @@
+.components-page {
+  padding-block-end: clamp(2rem, 7vw, 5rem);
+}
+
+.specimens {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.specimen {
+  min-inline-size: 0;
+  padding-block: 1.15rem 0.9rem;
+  border-block: 1px solid var(--collection-line);
+}
+
+.specimen__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-block-end: 1.25rem;
+}
+
+.specimen__heading h2 {
+  margin: 0;
+  font: 600 clamp(1.5rem, 2.6vw, 2rem)/1.12 Georgia, serif;
+  letter-spacing: -0.025em;
+}
+
+.specimen__heading p {
+  margin-block: 0.3rem 0;
+  color: var(--collection-muted);
+  font-size: 0.875rem;
+}
+
+.specimen__stage {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  overflow: hidden;
+  min-block-size: clamp(10rem, 19vw, 15rem);
+  border: 1px solid var(--collection-line);
+  border-radius: 0.875rem;
+}
+
+.specimen__stage--icons {
+  background: #eeece1;
+  color: #444334;
+}
+
+.specimen__stage--loading {
+  background: #e7eee4;
+  color: var(--collection-accent);
+}
+
+.specimen__sample {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  gap: 0.7rem;
+  min-inline-size: 0;
+}
+
+.specimen__sample + .specimen__sample {
+  border-inline-start: 1px solid var(--collection-line);
+}
+
+.specimen__symbol {
+  display: grid;
+  inline-size: 3.25rem;
+  block-size: 3.25rem;
+  place-items: center;
+}
+
+.specimen__sample code,
+.specimen__usage {
+  font-size: 0.8125rem;
+}
+
+.specimen__usage {
+  display: block;
+  margin-block-start: 1rem;
+  color: var(--collection-muted);
+  overflow-wrap: anywhere;
+}
+
+.specimen__toggle {
+  display: inline-flex;
+  min-block-size: 44px;
+  align-items: center;
+  gap: 0.6rem;
+  padding-inline: 0.65rem;
+  border: 1px solid var(--collection-line);
+  border-radius: 0.625rem;
+  background: transparent;
+  color: var(--collection-ink);
+  font: inherit;
+  font-size: 0.8125rem;
+  cursor: pointer;
+}
+
+.specimen__toggle:hover {
+  border-color: var(--collection-accent);
+}
+
+.specimen__switch {
+  display: flex;
+  box-sizing: border-box;
+  inline-size: 1.65rem;
+  block-size: 0.95rem;
+  align-items: center;
+  padding-inline: 0.14rem;
+  border-radius: 1rem;
+  background: #707d73;
+}
+
+.specimen__switch::before {
+  inline-size: 0.67rem;
+  block-size: 0.67rem;
+  border-radius: 50%;
+  background: #fff;
+  content: '';
+}
+
+.specimen__toggle[aria-pressed='true'] .specimen__switch {
+  justify-content: flex-end;
+  background: var(--collection-accent);
+}
+
+@media (max-width: 45rem) {
+  .specimens {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
